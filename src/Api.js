@@ -1,29 +1,30 @@
-import React, { Component } from 'react';
 import axios from 'axios';
 
 
-class QuizApi extends Component {
+class QuizApi {
 
-  constructor(props) {
-    super(props);
+  constructor() {
     this.baseURL = 'https://opentdb.com/';
-    this.apiURL = this.baseURL + 'api.php';
+    this.apiURL = this.baseURL + 'api.php?type=multiple';
     this.tokenURL = this.baseURL + 'api_token.php';
-    this.timeout = 1000;
+  }
+
+  initToken = () => {
+    let tokenData = localStorage.getItem('quizToken');
+    tokenData = JSON.parse(tokenData);
+    return  Promise.resolve()
+    if (!tokenData) {
+      return axios.get(this.tokenURL + '?command=request')
+        .then((response) => {
+          this.setToken(response.data.token);
+        });
+    }
   }
 
   getToken = () => {
     let tokenData = localStorage.getItem('quizToken');
     tokenData = JSON.parse(tokenData);
-    if (tokenData) {
-      return tokenData.token
-    }
-    else {
-      axios.get(this.tokenURL + '?command=request')
-        .then((response) => {
-          this.setToken(response.data.token);
-        });
-    }
+    return  tokenData.token;
   }
 
   setToken = (token) => {
@@ -33,7 +34,7 @@ class QuizApi extends Component {
 
   resetToken = () => {
     const token = this.getToken();
-    axios.get(this.tokenURL + '?command=reset&token=' + token)
+    return axios.get(this.tokenURL + '?command=reset&token=' + token)
       .then((response) => {
         this.setToken(response.data.token);
       });
@@ -46,23 +47,14 @@ class QuizApi extends Component {
     }
   }
 
-  fetchQuestions = (number = 50) => {
+  fetchQuestions = (number = 10) => {
     if (number < 1 || number > 50) {
       throw 'Invalid number of questions to fetch [1 - 50]';
     }
     let tokenPart = null;
     const token = this.getToken();
     tokenPart = token === null? null : '&token=' + token;
-    axios.get(this.apiURL + `?amount=${number}${tokenPart}`)
-      .then((response) => {console.log(response)});
-  }
-
-  render() {
-    return (
-      <div className="App">
-      {this.fetchQuestions()}
-      </div>
-    );
+    return axios.get(this.apiURL + `&amount=${number}${tokenPart}`);
   }
 }
 

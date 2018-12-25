@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-import QuizApi from './Components/api.js';
-
+import Questions from './Components/Questions';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <QuizApi />
+        <Questions />
       </div>
     );
   }
