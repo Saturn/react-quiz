@@ -11,7 +11,7 @@ class Question extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.question}</p>
+        <p dangerouslySetInnerHTML={{__html: this.props.question}}></p>
       </div>
       );
   }
