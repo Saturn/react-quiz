@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchQuestions, fetchQuestion } from '../store/actions';
 
+import Question from './Question';
+
+
 class Questions extends Component {
 
   constructor(props) {
@@ -14,20 +17,28 @@ class Questions extends Component {
   }
 
   render() {
-    return (
-      <div>
-    {this.props.questions.map((item, i) => {
-        return <p key={i}>{item.question}</p>
-    })}
-    </div>
-    );
+      if (!this.props.isLoading) {
+        return (
+          <div>
+        {this.props.questions.map((item, i) => {
+            return <Question question={item.question} />
+        })}
+        </div>
+        );
+      }
+      else {
+        return (
+          <p>Loading...</p>
+          );
+      }
   }
 }
 
 const mapStateToProps = state => {
   return {
-    questions: state.receiveQuestions.questions
+    questions: state.questions,
+    isLoading: state.isLoading
   }
-}
+};
 
 export default connect(mapStateToProps)(Questions);

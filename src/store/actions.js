@@ -25,7 +25,7 @@ export const checkQuestion = answer => {
 export const receiveQuestions = questions => {
   return {
     type: RECEIVE_QUESTIONS,
-    questions: questions
+    payload: questions.results
   }
 }
 

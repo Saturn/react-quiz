@@ -19,56 +19,43 @@ const initialState = {
   score: 0
 };
 
-
-const startQuiz = (state = initialState, action) => {
-  return {
-    ...state,
-    started: true
-  }
-}
-
-
-const endQuiz = (state, action) => {
-  return initialState;
-}
-
-
-const receiveQuestions = (state, action) => {
-  const questions = action.type === RECEIVE_QUESTIONS ? action.questions.results : [];
-  return {
-    ...state,
-    isFetching: false,
-    questions: questions,
-    currentQuestion: 0,
-    score: 0
-  }
-}
-
-
-const fetchQuestion = (state = {}, action) => {
-  return {
-    ...state,
-    currentQuestion: state.currentQuestion + 1
-  }
-}
-
-
-const checkQuestion = (state = {}, action) => {
-  if (action.answer === action.correct_answer) {
-    return {
-      ...state,
-      score: state.score + 1
-    }
-  }
-  return { ...state };
-}
-
-const quizAppReducer = combineReducers({
-  startQuiz,
-  endQuiz,
-  receiveQuestions,
-  fetchQuestion,
-  checkQuestion
-});
-
-export default quizAppReducer;
+export const quizAppReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case START_QUIZ:
+      return {
+        ...initialState,
+        started: true
+      }
+    case END_QUIZ:
+      return {
+        ...initialState
+      }
+    case RECEIVE_QUESTIONS:
+      return {
+        ...state,
+        isFetching: false,
+        questions: action.payload,
+        currentQuestion: 0,
+        score: 0
+      }
+    case FETCH_QUESTION:
+      return {
+        ...state,
+        currentQuestion: state.currentQuestion + 1
+      }
+    case CHECK_QUESTION:
+      if (action.answer === action.correctAnswer) {
+        return {
+          ...state,
+          score: state.score + 1
+        }
+      }
+      else {
+        return {
+          ...state
+        }
+      }
+    default:
+      return {...state};
+  };
+};
