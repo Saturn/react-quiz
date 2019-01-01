@@ -12,6 +12,12 @@ class Question extends Component {
     return (
       <div>
         <p dangerouslySetInnerHTML={{__html: this.props.question}}></p>
+        <ul>
+        {this.props.answers.map(item => {
+          return <li>{item}</li>
+        })
+      }
+        </ul>
       </div>
       );
   }

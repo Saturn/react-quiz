@@ -21,7 +21,7 @@ class Questions extends Component {
         return (
           <div>
         {this.props.questions.map((item, i) => {
-            return <Question question={item.question} />
+            return <Question question={item.question} answers={item.answers} />
         })}
         </div>
         );

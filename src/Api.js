@@ -51,9 +51,11 @@ class QuizApi {
         const data = []
         console.log(response);
         response.data.results.forEach((item, i) => {
+          const answers = item.incorrect_answers;
+          answers.push(item.correct_answer);
           data[i] = {
             question: item.question,
-            answers: item.incorrect_answers
+            answers: answers
           }
         });
         return data
