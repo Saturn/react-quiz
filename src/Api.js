@@ -46,7 +46,18 @@ class QuizApi {
     let tokenPart = null;
     const token = this.getToken();
     tokenPart = token === null? null : '&token=' + token;
-    return axios.get(this.apiURL + `&amount=${number}${tokenPart}`);
+    return axios.get(this.apiURL + `&amount=${number}${tokenPart}`)
+      .then((response) => {
+        const data = []
+        console.log(response);
+        response.data.results.forEach((item, i) => {
+          data[i] = {
+            question: item.question,
+            answers: item.incorrect_answers
+          }
+        });
+        return data
+      });
   }
 }
 

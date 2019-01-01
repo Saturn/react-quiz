@@ -25,7 +25,7 @@ export const checkQuestion = answer => {
 export const receiveQuestions = questions => {
   return {
     type: RECEIVE_QUESTIONS,
-    payload: questions.results
+    payload: questions
   }
 }
 
@@ -56,7 +56,7 @@ export const fetchQuestions = () => {
         () => quizApi.fetchQuestions()
       )
       .then(
-        response => dispatch(receiveQuestions(response.data))
+        response => dispatch(receiveQuestions(response))
       )
   }
 }
