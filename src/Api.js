@@ -10,26 +10,18 @@ class QuizApi {
   }
 
   initToken = () => {
-    let tokenData = localStorage.getItem('quizToken');
-    tokenData = JSON.parse(tokenData);
-    return  Promise.resolve()
-    if (!tokenData) {
-      return axios.get(this.tokenURL + '?command=request')
-        .then((response) => {
-          this.setToken(response.data.token);
-        });
-    }
+    return axios.get(this.tokenURL + '?command=request')
+      .then((response) => {
+        this.setToken(response.data.token);
+      });
   }
 
   getToken = () => {
-    let tokenData = localStorage.getItem('quizToken');
-    tokenData = JSON.parse(tokenData);
-    return  tokenData.token;
+    return localStorage.getItem('quizToken');
   }
 
   setToken = (token) => {
-    const quizTokenData = {token: token, dateSet: new Date()};
-    localStorage.setItem('quizToken', JSON.stringify(quizTokenData));
+    localStorage.setItem('quizToken', token);
   }
 
   resetToken = () => {
