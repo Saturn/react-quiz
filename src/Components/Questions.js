@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { fetchQuestions, fetchQuestion } from '../store/actions';
-
 
 class Questions extends Component {
 
@@ -17,10 +16,18 @@ class Questions extends Component {
   render() {
     return (
       <div>
-
-      </div>
+    {this.props.questions.map((item, i) => {
+        return <p key={i}>{item.question}</p>
+    })}
+    </div>
     );
   }
 }
 
-export default connect()(Questions);
+const mapStateToProps = state => {
+  return {
+    questions: state.receiveQuestions.questions
+  }
+}
+
+export default connect(mapStateToProps)(Questions);

@@ -34,11 +34,11 @@ const endQuiz = (state, action) => {
 
 
 const receiveQuestions = (state, action) => {
-  console.log(action);
+  const questions = action.type === RECEIVE_QUESTIONS ? action.questions.results : [];
   return {
     ...state,
     isFetching: false,
-    questions: action.data,
+    questions: questions,
     currentQuestion: 0,
     score: 0
   }
