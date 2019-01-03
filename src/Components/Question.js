@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchQuestions, fetchQuestion } from '../store/actions';
+
 import Answer from './Answer';
 
 class Question extends Component {

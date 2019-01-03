@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchQuestions, fetchQuestion, startQuiz } from '../store/actions';
+import { fetchQuestions, startQuiz } from '../store/actions';
 
 import Question from './Question';
 import StartButton from './StartButton';

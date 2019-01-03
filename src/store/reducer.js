@@ -1,7 +1,3 @@
-import QuizApi from '../Api.js';
-
-import { combineReducers } from 'redux';
-
 import {
   FETCH_QUESTION,
   CHECK_QUESTION,
