@@ -9,6 +9,7 @@ class Quiz extends Component {
 
   constructor(props) {
     super(props);
+    this.getCurrentQuestion = this.getCurrentQuestion.bind(this);
     this.startButtonClickHandler = this.startButtonClickHandler.bind(this);
     this.nextButtonClickHandler = this.nextButtonClickHandler.bind(this);
     this.answerClickHandler = this.answerClickHandler.bind(this);
@@ -26,8 +27,18 @@ class Quiz extends Component {
     this.props.dispatch(fetchQuestion());
   }
 
-  answerClickHandler(e) {
-    // this.props.dispatch(checkQuestion(answer, correctAnswer));
+  answerClickHandler(answer, e) {
+    const correctAnswer = this.getCurrentQuestion().correctAnswer;
+    if (answer === correctAnswer) {
+      console.log(answer + ' is correct!');
+    }
+    else {
+      console.log(answer + ' is incorrect!');
+    }
+  }
+
+  getCurrentQuestion() {
+    return this.props.questions[this.props.currentQuestion];
   }
 
   render() {
@@ -39,11 +50,12 @@ class Quiz extends Component {
       return <p>Loading...</p>
     }
     else {
-      const currentQuestion = this.props.questions[this.props.currentQuestion];
+      const currentQuestion = this.getCurrentQuestion();
       return (
         <div>
           <Question question={currentQuestion.question}
-                    answers={currentQuestion.answers} />
+                    answers={currentQuestion.answers}
+                    click={this.answerClickHandler} />
         </div>
       );
     }

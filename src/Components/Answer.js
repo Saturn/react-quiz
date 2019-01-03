@@ -7,7 +7,11 @@ class Answer extends Component {
   }
 
   render() {
-    return <li>{this.props.answer}</li>
+    return (
+      <button onClick={(e) => this.props.click(this.props.answer, e)}>
+        {this.props.answer}
+      </button>
+    );
   }
 }
 

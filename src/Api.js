@@ -63,6 +63,7 @@ class QuizApi {
           shuffle(answers);
           data[i] = {
             question: item.question,
+            correctAnswer: item.correct_answer,
             answers: answers
           }
         });

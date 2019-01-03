@@ -15,7 +15,7 @@ class Question extends Component {
         <ul>
         {
           this.props.answers.map(item => {
-            return <Answer answer={item} />
+            return <Answer answer={item} click={this.props.click} />
           })
         }
         </ul>
