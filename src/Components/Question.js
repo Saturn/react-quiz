@@ -15,7 +15,8 @@ class Question extends Component {
         <p dangerouslySetInnerHTML={{__html: this.props.question}}></p>
         {
           this.props.answers.map(item => {
-            return <Answer answer={item} click={this.props.click} />
+            return <Answer answer={item}
+                           click={this.props.click} />
           })
         }
       </div>

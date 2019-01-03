@@ -5,12 +5,15 @@ import {
   fetchQuestion,
   startQuiz,
   incrementScore,
-  endQuiz
+  endQuiz,
+  endValidation,
+  startValidation
 } from '../store/actions';
 
 import Question from './Question';
 import Score from './Score';
 import StartButton from './StartButton';
+import NextButton from './NextButton';
 
 class Quiz extends Component {
 
@@ -31,20 +34,20 @@ class Quiz extends Component {
   }
 
   nextButtonClickHandler(e) {
+    this.props.dispatch(endValidation());
     this.props.dispatch(fetchQuestion());
   }
 
   answerClickHandler(answer, e) {
-    const correctAnswer = this.getCurrentQuestion().correctAnswer;
-    const isCorrect = answer === correctAnswer;
-    if (isCorrect) {
-      this.props.dispatch(incrementScore());
-    }
-    if (this.props.currentQuestion < 9) {
-      this.props.dispatch(fetchQuestion());
-    }
-    else {
-      this.props.dispatch(endQuiz());
+    if (!this.props.isValidating) {
+      const correctAnswer = this.getCurrentQuestion().correctAnswer;
+      this.props.dispatch(startValidation());
+      if (answer === correctAnswer) {
+        this.props.dispatch(incrementScore());
+      }
+      if (this.props.currentQuestion >= 9) {
+        this.props.dispatch(endQuiz());
+      }
     }
   }
 
@@ -71,14 +74,20 @@ class Quiz extends Component {
       return <p>Loading...</p>
     }
     else {
+      let nextButton;
+      if (this.props.isValidating && this.props.currentQuestion < 9) {
+        nextButton = <NextButton click={this.nextButtonClickHandler} />
+      }
       const theCurrentQuestion = this.getCurrentQuestion();
       return (
         <div>
           <Question question={theCurrentQuestion.question}
                     questionNumber={this.props.currentQuestion + 1}
                     answers={theCurrentQuestion.answers}
-                    click={this.answerClickHandler} />
+                    click={this.answerClickHandler}
+                     />
           <Score currentScore={this.props.score} />
+          {nextButton}
         </div>
       );
     }
