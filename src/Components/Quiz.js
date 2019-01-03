@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchQuestions, fetchQuestion, startQuiz } from '../store/actions';
+import {
+  fetchQuestions,
+  fetchQuestion,
+  startQuiz,
+  incrementScore,
+  endQuiz
+} from '../store/actions';
 
 import Question from './Question';
+import Score from './Score';
 import StartButton from './StartButton';
 
 class Quiz extends Component {
@@ -29,11 +36,15 @@ class Quiz extends Component {
 
   answerClickHandler(answer, e) {
     const correctAnswer = this.getCurrentQuestion().correctAnswer;
-    if (answer === correctAnswer) {
-      console.log(answer + ' is correct!');
+    const isCorrect = answer === correctAnswer;
+    if (isCorrect) {
+      this.props.dispatch(incrementScore());
+    }
+    if (this.props.currentQuestion < 9) {
+      this.props.dispatch(fetchQuestion());
     }
     else {
-      console.log(answer + ' is incorrect!');
+      this.props.dispatch(endQuiz());
     }
   }
 
@@ -56,6 +67,7 @@ class Quiz extends Component {
           <Question question={currentQuestion.question}
                     answers={currentQuestion.answers}
                     click={this.answerClickHandler} />
+          <Score currentScore={this.props.score} />
         </div>
       );
     }
@@ -67,7 +79,8 @@ const mapStateToProps = state => {
     isStarted: state.isStarted,
     questions: state.questions,
     currentQuestion: state.currentQuestion,
-    isFetching: state.isFetching
+    isFetching: state.isFetching,
+    score: state.score
   }
 };
 

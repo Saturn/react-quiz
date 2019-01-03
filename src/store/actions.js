@@ -15,7 +15,7 @@ export const fetchQuestion = () => {
   }
 }
 
-export const checkQuestion = () => {
+export const incrementScore = () => {
   return {
     type: INCREMENT_SCORE,
   }
