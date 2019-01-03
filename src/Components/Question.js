@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { fetchQuestions, fetchQuestion } from '../store/actions';
 import Answer from './Answer';
 
@@ -25,5 +24,4 @@ class Question extends Component {
   }
 }
 
-
-export default connect()(Question);
+export default Question;
