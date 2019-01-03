@@ -12,39 +12,39 @@ export const START_QUIZ = 'START_QUIZ';
 export const fetchQuestion = () => {
   return {
     type: FETCH_QUESTION,
-  }
-}
+  };
+};
 
 export const incrementScore = () => {
   return {
     type: INCREMENT_SCORE,
-  }
-}
+  };
+};
 
 export const receiveQuestions = questions => {
   return {
     type: RECEIVE_QUESTIONS,
     payload: questions
-  }
-}
+  };
+};
 
 export const requestQuestions = () => {
   return {
     type: REQUEST_QUESTIONS
-  }
-}
+  };
+};
 
 export const endQuiz = () => {
   return {
     type: END_QUIZ,
-  }
-}
+  };
+};
 
 export const startQuiz = () => {
   return {
     type: START_QUIZ
-  }
-}
+  };
+};
 
 export const startValidation = () => {
   return {
@@ -68,6 +68,6 @@ export const fetchQuestions = () => {
       )
       .then(
         response => dispatch(receiveQuestions(response))
-      )
-  }
-}
+      );
+  };
+};
