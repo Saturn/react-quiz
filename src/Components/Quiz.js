@@ -35,7 +35,12 @@ class Quiz extends Component {
 
   nextButtonClickHandler(e) {
     this.props.dispatch(endValidation());
-    this.props.dispatch(fetchQuestion());
+    if (this.props.currentQuestion < 9) {
+      this.props.dispatch(fetchQuestion());
+    }
+    else {
+      this.props.dispatch(endQuiz());
+    }
   }
 
   answerClickHandler(answer, e) {
@@ -45,7 +50,7 @@ class Quiz extends Component {
       if (answer === correctAnswer) {
         this.props.dispatch(incrementScore());
       }
-      if (this.props.currentQuestion >= 9) {
+      if (this.props.currentQuestion > 9) {
         this.props.dispatch(endQuiz());
       }
     }
@@ -75,7 +80,7 @@ class Quiz extends Component {
     }
     else {
       let nextButton;
-      if (this.props.isValidating && this.props.currentQuestion < 9) {
+      if (this.props.isValidating) {
         nextButton = <NextButton click={this.nextButtonClickHandler} />
       }
       const theCurrentQuestion = this.getCurrentQuestion();
