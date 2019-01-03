@@ -4,7 +4,7 @@ export const FETCH_QUESTIONS = 'FETCH_QUESTIONS';
 export const REQUEST_QUESTIONS = 'REQUEST_QUESTIONS';
 export const FETCH_QUESTION = 'FETCH_QUESTION';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
-export const CHECK_QUESTION = 'CHECK_QUESTION';
+export const INCREMENT_SCORE = 'INCREMENT_SCORE';
 export const END_QUIZ = 'END_QUIZ';
 export const START_QUIZ = 'START_QUIZ';
 
@@ -15,11 +15,9 @@ export const fetchQuestion = () => {
   }
 }
 
-export const checkQuestion = (answer, correctAnswer) => {
+export const checkQuestion = () => {
   return {
-    type: CHECK_QUESTION,
-    answer: answer,
-    correctAnswer: correctAnswer
+    type: INCREMENT_SCORE,
   }
 }
 

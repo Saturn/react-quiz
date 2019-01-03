@@ -1,6 +1,6 @@
 import {
   FETCH_QUESTION,
-  CHECK_QUESTION,
+  INCREMENT_SCORE,
   REQUEST_QUESTIONS,
   END_QUIZ,
   START_QUIZ,
@@ -45,17 +45,10 @@ export const quizAppReducer = (state = initialState, action) => {
         ...state,
         currentQuestion: state.currentQuestion + 1
       }
-    case CHECK_QUESTION:
-      if (action.answer === action.correctAnswer) {
-        return {
-          ...state,
-          score: state.score + 1
-        }
-      }
-      else {
-        return {
-          ...state
-        }
+    case INCREMENT_SCORE:
+      return {
+        ...state,
+        score: state.score + 1
       }
     default:
       return {
