@@ -11,6 +11,7 @@ class Quiz extends Component {
     super(props);
     this.startButtonClickHandler = this.startButtonClickHandler.bind(this);
     this.nextButtonClickHandler = this.nextButtonClickHandler.bind(this);
+    this.answerClickHandler = this.answerClickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +24,10 @@ class Quiz extends Component {
 
   nextButtonClickHandler(e) {
     this.props.dispatch(fetchQuestion());
+  }
+
+  answerClickHandler(e) {
+    // this.props.dispatch(checkQuestion(answer, correctAnswer));
   }
 
   render() {

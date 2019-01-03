@@ -11,5 +11,4 @@ class StartButton extends Component {
   }
 }
 
-
 export default StartButton;

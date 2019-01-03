@@ -15,10 +15,11 @@ export const fetchQuestion = () => {
   }
 }
 
-export const checkQuestion = answer => {
+export const checkQuestion = (answer, correctAnswer) => {
   return {
     type: CHECK_QUESTION,
-    answer: answer
+    answer: answer,
+    correctAnswer: correctAnswer
   }
 }
 
