@@ -48,11 +48,19 @@ class QuizApi {
     tokenPart = token === null? null : '&token=' + token;
     return axios.get(this.apiURL + `&amount=${number}${tokenPart}`)
       .then((response) => {
+        const shuffle = (a) => {
+          for (let i = a.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [a[i], a[j]] = [a[j], a[i]];
+          }
+        }
+
         const data = []
         console.log(response);
         response.data.results.forEach((item, i) => {
           const answers = item.incorrect_answers;
           answers.push(item.correct_answer);
+          shuffle(answers);
           data[i] = {
             question: item.question,
             answers: answers
