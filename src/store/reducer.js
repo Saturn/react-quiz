@@ -12,6 +12,7 @@ const initialState = {
   isStarted: false,
   isFinished: false,
   isFetching: false,
+  isValidating: false,
   questions: [],
   currentQuestion: 0,
   score: 0
@@ -46,6 +47,16 @@ export const quizAppReducer = (state = initialState, action) => {
       return {
         ...state,
         currentQuestion: state.currentQuestion + 1
+      }
+    case START_VALIDATION:
+      return {
+        ...state,
+        isValidating: true
+      }
+    case END_VALIDATION:
+      return {
+        ...state,
+        isValidating: false
       }
     case INCREMENT_SCORE:
       return {

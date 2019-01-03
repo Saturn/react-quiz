@@ -46,6 +46,18 @@ export const startQuiz = () => {
   }
 }
 
+export const startValidation = () => {
+  return {
+    type: START_VALIDATION
+  };
+};
+
+export const endValidation = () => {
+  return {
+    type: END_VALIDATION
+  };
+};
+
 export const fetchQuestions = () => {
   return dispatch => {
     dispatch(requestQuestions());

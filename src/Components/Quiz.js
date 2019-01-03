@@ -89,6 +89,7 @@ const mapStateToProps = state => {
   return {
     isStarted: state.isStarted,
     isFinished: state.isFinished,
+    isValidating: state.isValidating,
     questions: state.questions,
     currentQuestion: state.currentQuestion,
     isFetching: state.isFetching,
