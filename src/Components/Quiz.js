@@ -17,27 +17,28 @@ class Quiz extends Component {
   }
 
   render() {
-      if (!this.props.isLoading) {
-        return (
-          <div>
-        {this.props.questions.map((item, i) => {
-            return <Question question={item.question} answers={item.answers} />
-        })}
+    if (this.props.isFetching) {
+      return <p>Loading...</p>
+    }
+    else {
+      return (
+        <div>
+        {
+          this.props.questions.map((item, i) => {
+            return <Question question={item.question}
+                             answers={item.answers} />
+          })
+        }
         </div>
-        );
-      }
-      else {
-        return (
-          <p>Loading...</p>
-          );
-      }
+      );
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
     questions: state.questions,
-    isLoading: state.isLoading
+    isFetching: state.isFetching
   }
 };
 

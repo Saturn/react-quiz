@@ -5,6 +5,7 @@ import { combineReducers } from 'redux';
 import {
   FETCH_QUESTION,
   CHECK_QUESTION,
+  REQUEST_QUESTIONS,
   END_QUIZ,
   START_QUIZ,
   RECEIVE_QUESTIONS
@@ -29,6 +30,11 @@ export const quizAppReducer = (state = initialState, action) => {
     case END_QUIZ:
       return {
         ...initialState
+      }
+    case REQUEST_QUESTIONS:
+      return {
+        ...state,
+        isFetching: true
       }
     case RECEIVE_QUESTIONS:
       return {
@@ -56,6 +62,8 @@ export const quizAppReducer = (state = initialState, action) => {
         }
       }
     default:
-      return {...state};
+      return {
+        ...state
+      };
   };
 };
