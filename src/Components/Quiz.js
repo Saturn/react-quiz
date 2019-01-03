@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchQuestions, startQuiz } from '../store/actions';
+import { fetchQuestions, fetchQuestion, startQuiz } from '../store/actions';
 
 import Question from './Question';
 import StartButton from './StartButton';
@@ -16,9 +16,10 @@ class Quiz extends Component {
   }
 
   startButtonClickHandler(e) {
-    const { dispatch } = this.props;
-    dispatch(startQuiz());
-    dispatch(fetchQuestions());
+    this.props.dispatch(startQuiz());
+    this.props.dispatch(fetchQuestions());
+  }
+
   }
 
   render() {
@@ -30,14 +31,11 @@ class Quiz extends Component {
       return <p>Loading...</p>
     }
     else {
+      const currentQuestion = this.props.questions[this.props.currentQuestion];
       return (
         <div>
-        {
-          this.props.questions.map((item, i) => {
-            return <Question question={item.question}
-                             answers={item.answers} />
-          })
-        }
+          <Question question={currentQuestion.question}
+                    answers={currentQuestion.answers} />
         </div>
       );
     }
@@ -48,6 +46,7 @@ const mapStateToProps = state => {
   return {
     isStarted: state.isStarted,
     questions: state.questions,
+    currentQuestion: state.currentQuestion,
     isFetching: state.isFetching
   }
 };
