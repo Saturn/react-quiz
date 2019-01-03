@@ -8,8 +8,9 @@ class Answer extends Component {
 
   render() {
     return (
-      <button onClick={(e) => this.props.click(this.props.answer, e)}>
-        {this.props.answer}
+      <button
+        dangerouslySetInnerHTML={{__html: this.props.answer}}
+        onClick={(e) => this.props.click(this.props.answer, e)}>
       </button>
     );
   }

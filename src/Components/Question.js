@@ -11,14 +11,13 @@ class Question extends Component {
   render() {
     return (
       <div>
+        <p>{this.props.questionNumber}</p>
         <p dangerouslySetInnerHTML={{__html: this.props.question}}></p>
-        <ul>
         {
           this.props.answers.map(item => {
             return <Answer answer={item} click={this.props.click} />
           })
         }
-        </ul>
       </div>
       );
   }

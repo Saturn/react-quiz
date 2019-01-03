@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   isStarted: false,
+  isFinished: false,
   isFetching: false,
   questions: [],
   currentQuestion: 0,
@@ -25,7 +26,8 @@ export const quizAppReducer = (state = initialState, action) => {
       }
     case END_QUIZ:
       return {
-        ...initialState
+        ...state,
+        isFinished: true
       }
     case REQUEST_QUESTIONS:
       return {

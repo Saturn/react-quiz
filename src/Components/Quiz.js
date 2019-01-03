@@ -53,19 +53,30 @@ class Quiz extends Component {
   }
 
   render() {
+    const startButton = <StartButton click={this.startButtonClickHandler} />;
     if (!this.props.isStarted) {
-      return <StartButton click={this.startButtonClickHandler} />
+      return startButton;
+    }
+
+    if (this.props.isFinished) {
+      return (
+        <div>
+          <p>You scored {this.props.score}/10 !</p>
+          {startButton}
+        </div>
+      );
     }
 
     if (this.props.isFetching) {
       return <p>Loading...</p>
     }
     else {
-      const currentQuestion = this.getCurrentQuestion();
+      const theCurrentQuestion = this.getCurrentQuestion();
       return (
         <div>
-          <Question question={currentQuestion.question}
-                    answers={currentQuestion.answers}
+          <Question question={theCurrentQuestion.question}
+                    questionNumber={this.props.currentQuestion + 1}
+                    answers={theCurrentQuestion.answers}
                     click={this.answerClickHandler} />
           <Score currentScore={this.props.score} />
         </div>
@@ -77,6 +88,7 @@ class Quiz extends Component {
 const mapStateToProps = state => {
   return {
     isStarted: state.isStarted,
+    isFinished: state.isFinished,
     questions: state.questions,
     currentQuestion: state.currentQuestion,
     isFetching: state.isFetching,
