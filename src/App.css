@@ -1,3 +1,7 @@
+body {
+  background-color: linen;
+}
+
 h3 {
   text-align: center;
   text-decoration: underline;
@@ -9,17 +13,18 @@ h3 {
 }
 
 .answer-button, .answer-button-done {
+  display: block;
+  margin: 5px auto;
   border: 1px solid #0F23DC;
+  border-radius: 5px;
   color: white;
   background-color: blue;
   cursor: pointer;
-  padding: 25px;
-  margin: 15px 30px;
+  padding: 5px 25px;
   font-weight: 600;
-  max-width: 250px;
-  min-width: 250px;
-  max-height: 75px;
-  min-height: 75px;
+  max-width: 200px;
+  min-width: 200px;
+  min-height: 40px;
   -webkit-transition: all 0.1s;
   -moz-transition: all 0.1s;
   transition: all 0.1s;
@@ -68,7 +73,7 @@ h3 {
   cursor: pointer;
   padding: 10px 30px;
   margin: 5px 20px;
-  font-weight: 500;
+  font-weight: bold;
   -webkit-transition: all 0.1s;
   -moz-transition: all 0.1s;
   transition: all 0.1s;
@@ -88,7 +93,12 @@ h3 {
   width: 500px;
 }
 
+.question-box p {
+  margin: 0;
+}
+
 .answer-box {
+  text-align: center;
   margin: 0 auto;
   width: 500px;
 }
