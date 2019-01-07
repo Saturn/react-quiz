@@ -2,31 +2,87 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.answer-button, .answer-button-done {
+  border: 1px solid #0F23DC;
   color: white;
+  background-color: blue;
+  cursor: pointer;
+  padding: 25px 80px;
+  margin: 15px 30px;
+  font-weight: 600;
+  max-width: 250px;
+  min-width: 250px;
+  max-height: 75px;
+  min-height: 75px;
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
 }
 
-.App-link {
-  color: #61dafb;
+.answer-button-done {
+  cursor: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.answer-button:hover,
+.answer-button:active {
+  background-color: #0A1891;
+}
+
+.answer-button-correct {
+  background-color: green;
+}
+
+.answer-button-incorrect {
+  background-color: red;
+}
+
+.next-button {
+  border: 1px solid black;
+  color: white;
+  background-color: grey;
+  cursor: pointer;
+  padding: 10px 30px;
+  margin: 5px 20px;
+  font-weight: 200;
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+.next-button:hover,
+.next-button:active {
+  background-color: darkslategrey;
+}
+
+
+.start-button {
+  border: 1px solid black;
+  color: white;
+  background-color: limegreen;
+  cursor: pointer;
+  padding: 10px 30px;
+  margin: 5px 20px;
+  font-weight: 500;
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+.start-button:hover,
+.start-button:active {
+  background-color: seagreen;
+}
+
+.question-box {
+  border: 1px solid blue;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 1.2em;
+  margin: 0 auto;
+  width: 500px;
+}
+
+.answer-box {
+  margin: 0 auto;
+  width: 500px;
 }

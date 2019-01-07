@@ -45,10 +45,10 @@ class Quiz extends Component {
     }
   }
 
-  answerClickHandler(answer, e) {
+  answerClickHandler(answer, answerId, e) {
     if (!this.props.isValidating) {
       this.props.dispatch(startValidation());
-      this.props.dispatch(makeSelection(answer));
+      this.props.dispatch(makeSelection(answerId));
       if (answer === this.getCurrentQuestion().correctAnswer) {
         this.props.dispatch(incrementScore());
       }
@@ -58,12 +58,33 @@ class Quiz extends Component {
     }
   }
 
+  getAnswerButtonStyles() {
+    const styles = [0, 0, 0 ,0];
+    styles.fill('answer-button', 0, 4);
+    if (this.props.isValidating) {
+      styles.fill('answer-button-done', 0, 4);
+      this.getCurrentQuestion().answers.forEach((item, id) => {
+        if (id === this.props.currentSelection) {
+          styles[id] = 'answer-button-done answer-button-incorrect';
+        }
+        if (item === this.getCurrentAnswer()) {
+          styles[id] = 'answer-button-done answer-button-correct';
+        }
+      });
+    }
+    return styles;
+  }
+
   getCurrentQuestion() {
     return this.props.questions[this.props.currentQuestion];
   }
 
   getCurrentAnswer() {
     return this.getCurrentQuestion().correctAnswer;
+  }
+
+  getCurrentSelectedAnswer() {
+    return this.getCurrentQuestion().answers[this.props.currentSelection];
   }
 
   render() {
@@ -95,6 +116,7 @@ class Quiz extends Component {
           <Question question={theCurrentQuestion.question}
                     questionNumber={this.props.currentQuestion + 1}
                     answers={theCurrentQuestion.answers}
+                    answerStyles={this.getAnswerButtonStyles()}
                     click={this.answerClickHandler}
                      />
           <Score currentScore={this.props.score} />
@@ -112,6 +134,7 @@ const mapStateToProps = state => {
     isValidating: state.isValidating,
     questions: state.questions,
     currentQuestion: state.currentQuestion,
+    currentSelection: state.currentSelection,
     isFetching: state.isFetching,
     score: state.score
   }

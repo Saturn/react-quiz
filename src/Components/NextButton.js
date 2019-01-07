@@ -7,7 +7,7 @@ class NextButton extends Component {
   }
 
   render() {
-    return <button onClick={this.props.click}>Next</button>
+    return <button className="next-button" onClick={this.props.click}>Next</button>
   }
 }
 
