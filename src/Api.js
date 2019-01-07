@@ -41,7 +41,7 @@ class QuizApi {
 
   fetchQuestions = (number = 10) => {
     if (number < 1 || number > 50) {
-      throw 'Invalid number of questions to fetch [1 - 50]';
+      throw new Error('Invalid number of questions to fetch [1 - 50]');
     }
     let tokenPart = null;
     const token = this.getToken();

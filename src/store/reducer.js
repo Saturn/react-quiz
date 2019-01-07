@@ -77,5 +77,5 @@ export const quizAppReducer = (state = initialState, action) => {
       return {
         ...state
       };
-  };
+  }
 };
