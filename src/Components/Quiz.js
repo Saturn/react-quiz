@@ -20,6 +20,7 @@ class Quiz extends Component {
   constructor(props) {
     super(props);
     this.getCurrentQuestion = this.getCurrentQuestion.bind(this);
+    this.getCurrentAnswer = this.getCurrentAnswer.bind(this);
     this.startButtonClickHandler = this.startButtonClickHandler.bind(this);
     this.nextButtonClickHandler = this.nextButtonClickHandler.bind(this);
     this.answerClickHandler = this.answerClickHandler.bind(this);
@@ -58,6 +59,10 @@ class Quiz extends Component {
 
   getCurrentQuestion() {
     return this.props.questions[this.props.currentQuestion];
+  }
+
+  getCurrentAnswer() {
+    return this.getCurrentQuestion().correctAnswer;
   }
 
   render() {
