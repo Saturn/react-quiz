@@ -7,7 +7,8 @@ import {
   incrementScore,
   endQuiz,
   endValidation,
-  startValidation
+  startValidation,
+  makeSelection
 } from '../store/actions';
 
 import Question from './Question';
@@ -46,9 +47,9 @@ class Quiz extends Component {
 
   answerClickHandler(answer, e) {
     if (!this.props.isValidating) {
-      const correctAnswer = this.getCurrentQuestion().correctAnswer;
       this.props.dispatch(startValidation());
-      if (answer === correctAnswer) {
+      this.props.dispatch(makeSelection(answer));
+      if (answer === this.getCurrentQuestion().correctAnswer) {
         this.props.dispatch(incrementScore());
       }
       if (this.props.currentQuestion > 9) {

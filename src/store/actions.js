@@ -9,6 +9,7 @@ export const START_VALIDATION = 'START_VALIDATION';
 export const END_VALIDATION = 'END_VALIDATION';
 export const END_QUIZ = 'END_QUIZ';
 export const START_QUIZ = 'START_QUIZ';
+export const MAKE_SELECTION = 'MAKE_SELECTION';
 
 
 export const fetchQuestion = () => {
@@ -45,6 +46,13 @@ export const endQuiz = () => {
 export const startQuiz = () => {
   return {
     type: START_QUIZ
+  };
+};
+
+export const makeSelection = (answer) => {
+  return {
+    type: MAKE_SELECTION,
+    payload: answer
   };
 };
 

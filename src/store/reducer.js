@@ -6,7 +6,8 @@ import {
   START_QUIZ,
   START_VALIDATION,
   END_VALIDATION,
-  RECEIVE_QUESTIONS
+  RECEIVE_QUESTIONS,
+  MAKE_SELECTION
 } from './actions';
 
 
@@ -17,6 +18,7 @@ const initialState = {
   isValidating: false,
   questions: [],
   currentQuestion: 0,
+  currentSelection: null,
   score: 0
 };
 
@@ -48,7 +50,13 @@ export const quizAppReducer = (state = initialState, action) => {
     case FETCH_QUESTION:
       return {
         ...state,
-        currentQuestion: state.currentQuestion + 1
+        currentQuestion: state.currentQuestion + 1,
+        currentSelection: null
+      }
+    case MAKE_SELECTION:
+      return {
+        ...state,
+        currentSelection: action.payload
       }
     case START_VALIDATION:
       return {
